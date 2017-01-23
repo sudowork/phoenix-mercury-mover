@@ -16,11 +16,11 @@ Phoenix.set({
 // ------------------------------------------------------------------------------
 // Const and globals.
 
-var INCREMENT_LOW = 1
-var INCREMENT_MID = 10
-var INCREMENT_HIGH = 100
+const INCREMENT_LOW = 1
+const INCREMENT_MID = 10
+const INCREMENT_HIGH = 100
 
-var MENU_BAR_HEIGHT = 22
+const MENU_BAR_HEIGHT = 22
 
 var mainShortcuts = []
 
