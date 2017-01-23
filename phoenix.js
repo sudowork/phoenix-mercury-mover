@@ -90,26 +90,26 @@ class Shortcut {
 // Main shortcuts to activate `move` or `resize` mode.
 
 var arrows = [
-  '\n',
-  '↑\n',
-  '←    →\n',
-  '↓\n',
-  '\n',
-].join('')
+  '↑',
+  '←    →',
+  '↓',
+].join('\n')
 
 // Move mode.
 var moveMode = new Shortcut(
   'up',
   ['cmd', 'ctrl'],
   [
-    'MOVE\n',
+    'MOVE',
+    '',
     arrows,
-    'Hit esc to dismiss\n',
-    'Use no modifier key to move ' + INCREMENT_LOW + ' pixel.\n',
-    'Use the shift key to move ' + INCREMENT_MID + ' pixels.\n',
-    'Use the option key to move ' + INCREMENT_HIGH + ' pixels.\n',
-    'Use the cmd key to move to the edge of the screen.\n',
-  ].join('')
+    '',
+    'Hit esc to dismiss',
+    `Use no modifier key to move ${INCREMENT_LOW} pixel.`,
+    `Use the shift key to move ${INCREMENT_MID} pixels.`,
+    `Use the option key to move ${INCREMENT_HIGH} pixels.`,
+    'Use the cmd key to move to the edge of the screen.',
+  ].join('\n')
 )
 
 // Resize mode (from right/down).
@@ -117,14 +117,16 @@ var resizeMode = new Shortcut(
   'right',
   ['cmd', 'ctrl'],
   [
-    'RESIZE\n',
+    'RESIZE',
+    '',
     arrows,
-    'Hit esc to dismiss\n',
-    'Use no modifier key to resize ' + INCREMENT_LOW + ' pixel.\n',
-    'Use the shift key to resize ' + INCREMENT_MID + ' pixels.\n',
-    'Use the option key to resize ' + INCREMENT_HIGH + ' pixels.\n',
-    'Use the cmd key to resize to the edge of the screen.\n',
-  ].join('')
+    '',
+    'Hit esc to dismiss',
+    `Use no modifier key to resize ${INCREMENT_LOW} pixel.`,
+    `Use the shift key to resize ${INCREMENT_MID} pixels.`,
+    `Use the option key to resize ${INCREMENT_HIGH} pixels.`,
+    'Use the cmd key to resize to the edge of the screen.',
+  ].join('\n')
 )
 
 // ------------------------------------------------------------------------------
