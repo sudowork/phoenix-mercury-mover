@@ -22,77 +22,68 @@ const INCREMENT_HIGH = 100
 
 const MENU_BAR_HEIGHT = 22
 
-var mainShortcuts = []
+const mainShortcuts = []
 
 // ------------------------------------------------------------------------------
 // Shortcut constructor.
 
-var Shortcut = function (key, modifiers, modalText) {
-  this.modal = Modal.build({ text: modalText, weight: 16 })
-  this.subShortcuts = []
-  this.keys = []
-  mainShortcuts.push(this)
-  var self = this
-  this.key = new Key(key, modifiers, function () {
-    self.disableSubShortcuts()
-    self.enableSubShortcuts()
-    self.showModal()
-  })
-}
-
-Shortcut.prototype.showModal = function () {
-
-  var self = this
-
-  // Close any previously opened modal.
-  // This is necessary because we have several main shortcuts and hitting
-  // them in a consecutive manner would result in multiple opened modals.
-  mainShortcuts.forEach(function (shortcut) {
-    if (shortcut !== self) {
-      shortcut.modal.close()
-    }
-  })
-
-  // Center the current modal on the current screen.
-  var screenFrame = Screen.main().frame()
-  var modalFrame = self.modal.frame()
-  self.modal.origin = {
-    x: screenFrame.x + ((screenFrame.width - modalFrame.width) / 2),
-    y: screenFrame.y + ((screenFrame.height - modalFrame.height) / 2),
+class Shortcut {
+  constructor(key, modifiers, modalText) {
+    this.modal = Modal.build({ text: modalText, weight: 16 })
+    this.subShortcuts = []
+    this.keys = []
+    mainShortcuts.push(this)
+    this.key = new Key(key, modifiers, () => {
+      this.disableSubShortcuts()
+      this.enableSubShortcuts()
+      this.showModal()
+    })
   }
+  showModal() {
+    this.closePreviouslyOpenedModals()
+    this.centerModalOnCurrentScreen()
+    this.modal.show()
+  }
+  closePreviouslyOpenedModals() {
+    // This is necessary because we have several main shortcuts and hitting
+    // them in a consecutive manner would result in multiple opened modals.
+    mainShortcuts.forEach(shortcut => {
+      if (shortcut !== this) {
+        shortcut.modal.close()
+      }
+    })
+  }
+  centerModalOnCurrentScreen() {
+    const screenFrame = Screen.main().frame()
+    const modalFrame = this.modal.frame()
+    this.modal.origin = {
+      x: screenFrame.x + ((screenFrame.width - modalFrame.width) / 2),
+      y: screenFrame.y + ((screenFrame.height - modalFrame.height) / 2),
+    }
+  }
+  enableSubShortcuts() {
+    const closeKey = new Key('escape', [], () => {
+      this.modal.close()
+      this.disableSubShortcuts()
+    })
+    closeKey.enable()
+    this.keys.push(closeKey)
 
-  self.modal.show()
-
-}
-
-Shortcut.prototype.enableSubShortcuts = function () {
-
-  var self = this
-
-  var closeKey = new Key('escape', [], function () {
-    self.modal.close()
-    self.disableSubShortcuts()
-  })
-  closeKey.enable()
-  self.keys.push(closeKey)
-
-  this.subShortcuts.forEach(function (x) {
-    var key = new Key(x.key, x.modifiers, x.cb)
-    key.enable()
-    self.keys.push(key)
-  })
-
-}
-
-Shortcut.prototype.disableSubShortcuts = function () {
-  this.keys.forEach(function (key) {
-    key.disable()
-  })
-  this.keys = []
-}
-
-Shortcut.prototype.addSubShortcut = function (key, modifiers, cb) {
-  this.subShortcuts.push({key: key, modifiers: modifiers, cb: cb})
+    this.subShortcuts.forEach(subShortcut => {
+      const key = new Key(subShortcut.key, subShortcut.modifiers, subShortcut.cb)
+      key.enable()
+      this.keys.push(key)
+    })
+  }
+  disableSubShortcuts() {
+    this.keys.forEach(function (key) {
+      key.disable()
+    })
+    this.keys = []
+  }
+  addSubShortcut(key, modifiers, cb) {
+    this.subShortcuts.push({key: key, modifiers: modifiers, cb: cb})
+  }
 }
 
 // ------------------------------------------------------------------------------
