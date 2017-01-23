@@ -109,7 +109,7 @@ var arrows = [
 // Move mode.
 var moveMode = new Shortcut(
   'up',
-  ['shift', 'ctrl', 'alt'],
+  ['cmd', 'ctrl'],
   [
     'MOVE\n',
     arrows,
@@ -124,7 +124,7 @@ var moveMode = new Shortcut(
 // Resize mode (from right/down).
 var resizeMode = new Shortcut(
   'right',
-  ['shift', 'ctrl', 'alt'],
+  ['cmd', 'ctrl'],
   [
     'RESIZE\n',
     arrows,

@@ -12,9 +12,9 @@ Move and resize windows on your Mac from the keyboard, positioning them precisel
 
 Hit one of the main shortcut keys to activate the **move** or **resize** mode:
 
-1. `shift-ctrl-alt-up` to move the frontmost window
+1. `cmd-ctrl-up` to move the frontmost window
 
-2. `shift-ctrl-alt-right` to resize (from right/down) the frontmost window
+2. `cmd-ctrl-right` to resize (from right/down) the frontmost window
 
 A popup shows up that explains which keys to press and what they do.
 
