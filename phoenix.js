@@ -22,6 +22,8 @@ const INCREMENT_HIGH = 100
 
 const MENU_BAR_HEIGHT = 22
 
+const MAIN_MODIFIERS = ['cmd', 'ctrl']
+
 const mainShortcuts = []
 
 // ------------------------------------------------------------------------------
@@ -98,7 +100,7 @@ var arrows = [
 // Move mode.
 var moveMode = new Shortcut(
   'up',
-  ['cmd', 'ctrl'],
+  MAIN_MODIFIERS,
   [
     'MOVE',
     '',
@@ -115,7 +117,7 @@ var moveMode = new Shortcut(
 // Resize mode (from right/down).
 var resizeMode = new Shortcut(
   'right',
-  ['cmd', 'ctrl'],
+  MAIN_MODIFIERS,
   [
     'RESIZE',
     '',
