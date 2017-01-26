@@ -14,6 +14,23 @@ Phoenix.set({
 })
 
 // ------------------------------------------------------------------------------
+// Load config
+
+function loadConfig() {
+  try {
+    require('./config.js')
+    return CONFIG
+  } catch (e) {
+    Phoenix.log('No config found.')
+    Phoenix.log(e)
+    return {}
+  }
+}
+
+const { PRESETS = [], MAIN_MODIFIERS = ['cmd', 'ctrl'] } = loadConfig()
+Phoenix.log(`Loaded ${PRESETS.length} presets`)
+
+// ------------------------------------------------------------------------------
 // Const and globals.
 
 const INCREMENT_LOW = 1
@@ -21,8 +38,6 @@ const INCREMENT_MID = 10
 const INCREMENT_HIGH = 100
 
 const MENU_BAR_HEIGHT = 22
-
-const MAIN_MODIFIERS = ['cmd', 'ctrl']
 
 const mainShortcuts = []
 
@@ -328,20 +343,7 @@ addSubShortcutToMenus('=', center)
 // Must be stored in a variable called PRESETS
 
 function configurePresets() {
-  loadPresets().forEach(addPreset)
-}
-
-function loadPresets() {
-  try {
-    require('./presets.js')
-    const presets = PRESETS || []
-    Phoenix.log(`Loaded ${presets.length} presets`)
-    return presets
-  } catch (e) {
-    Phoenix.log('No presets found.')
-    Phoenix.log(e)
-    return []
-  }
+  PRESETS.forEach(addPreset)
 }
 
 function addPreset({key, width, height, x, y, shortcut}) {

@@ -21,10 +21,14 @@ ln -s /path/to/repo/phoenix.js ~/.phoenix.js
 
 ### Configuring Presets
 
-Configure custom presets by creating a `presets.js` file in this repository's directory. The file should define a variable `PRESETS`, where each preset is an object with `{key, width, height, x, y}` or `{key, shortcut}` properties. Here's an example:
+Configure custom presets and modifier keys by creating a `config.js` file in this repository's directory.
+The file should define a variable `CONFIG` with optional properties `PRESETS` and `MAIN_MODIFIERS`.
+`CONFIG.PRESETS` should be an array of presets, where each preset is an object with `{key, width, height, x, y}` or `{key, shortcut}` properties.
+`CONFIG.MAIN_MODIFIERS` should be an array of modifier keys.
+Here's an example below:
 
 ```javascript
-// presets.js
+// config.js
 
 const PRESETS = [
   {key: 'f', width: 2560, height: 1573, x: 0, y: 23},
@@ -33,7 +37,7 @@ const PRESETS = [
 ]
 ```
 
-See `presets.example.js` for my personal setup.
+See `config.example.js` for my personal setup.
 
 ## Usage
 
