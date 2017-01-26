@@ -344,14 +344,14 @@ function loadPresets() {
   }
 }
 
-function addPreset({key, width, height, x, y}) {
-  const shortcut = () => {
+function addPreset({key, width, height, x, y, shortcut}) {
+  const defaultShortcut = () => {
     const window = Window.focused()
     if (window) {
       window.setFrame({width, height, x, y})
     }
   }
-  addSubShortcutToMenus(key, shortcut)
+  addSubShortcutToMenus(key, shortcut || defaultShortcut)
 }
 
 function addSubShortcutToMenus(key, shortcut) {
