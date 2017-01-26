@@ -34,4 +34,10 @@ Hit `esc` to dismiss the popup.
 
 Released under the [MIT License](http://opensource.org/licenses/mit-license).
 
-phoenix-mercury-mover is authored and maintained by [Kemar](https://marcarea.com).
+This repository is a fork of `phoenix-mercury-mover`, authored by [Kemar](https://marcarea.com).
+
+The main goals of this fork are:
+1. Implement all of mercury mover
+1. Make it easier for people to configure their own presets
+1. Switch to ES2015 for cleaner code
+
