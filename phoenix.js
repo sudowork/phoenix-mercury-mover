@@ -91,14 +91,14 @@ class Shortcut {
 // ------------------------------------------------------------------------------
 // Main shortcuts to activate `move` or `resize` mode.
 
-var arrows = [
+const arrows = [
   '↑',
   '←    →',
   '↓',
 ].join('\n')
 
 // Move mode.
-var moveMode = new Shortcut(
+const moveMode = new Shortcut(
   'up',
   MAIN_MODIFIERS,
   [
@@ -115,7 +115,7 @@ var moveMode = new Shortcut(
 )
 
 // Resize mode (from right/down).
-var resizeMode = new Shortcut(
+const resizeMode = new Shortcut(
   'right',
   MAIN_MODIFIERS,
   [
@@ -134,10 +134,10 @@ var resizeMode = new Shortcut(
 // ------------------------------------------------------------------------------
 // Resize.
 
-var resize = function (increment, direction) {
-  var window = Window.focused()
+function resize(increment, direction) {
+  const window = Window.focused()
   if (window) {
-    var size
+    let size
     switch (direction) {
       case 'right':
         size = { width: window.size().width + increment, height: window.size().height }
@@ -156,11 +156,11 @@ var resize = function (increment, direction) {
   }
 }
 
-var resizeToEdge = function (direction) {
-  var window = Window.focused()
+function resizeToEdge(direction) {
+  const window = Window.focused()
   if (window) {
-    var frame
-    var screenFrame = window.screen().flippedFrame()
+    let frame
+    const screenFrame = window.screen().flippedFrame()
     switch (direction) {
       case 'right':
         frame = {
@@ -222,10 +222,10 @@ resizeMode.addSubShortcut('down', ['cmd'], function () { resizeToEdge('down') })
 // ------------------------------------------------------------------------------
 // Move.
 
-var move = function (increment, direction) {
-  var window = Window.focused()
+function move(increment, direction) {
+  const window = Window.focused()
   if (window) {
-    var coords
+    let coords
     switch (direction) {
       case 'right':
         coords = { x: window.topLeft().x + increment, y: window.topLeft().y }
@@ -244,11 +244,11 @@ var move = function (increment, direction) {
   }
 }
 
-var moveToEdge = function (direction) {
-  var window = Window.focused()
+function moveToEdge(direction) {
+  const window = Window.focused()
   if (window) {
-    var coords
-    var screenFrame = window.screen().flippedFrame()
+    let coords
+    const screenFrame = window.screen().flippedFrame()
     switch (direction) {
       case 'right':
         coords = {
@@ -302,17 +302,17 @@ moveMode.addSubShortcut('down', ['cmd'], function () { moveToEdge('down') })
 // ------------------------------------------------------------------------------
 // Custom size/position shortcuts.
 
-var maximise = function () {
-  var window = Window.focused()
+const maximise = () => {
+  const window = Window.focused()
   if (window) {
     window.maximise()
   }
 }
 
-var center = function () {
-  var window = Window.focused()
+const center = () => {
+  const window = Window.focused()
   if (window) {
-    var screenFrame = window.screen().flippedVisibleFrame()
+    const screenFrame = window.screen().flippedVisibleFrame()
     window.setTopLeft({
       x: parseInt(screenFrame.x + ((screenFrame.width - window.size().width) / 2), 10),
       y: parseInt(screenFrame.y + ((screenFrame.height - window.size().height) / 2), 10),
