@@ -314,29 +314,14 @@ var center = function () {
   if (window) {
     var screenFrame = window.screen().flippedVisibleFrame()
     window.setTopLeft({
-      x: parseInt(screenFrame.x + ((screenFrame.width - window.size().width) / 2)),
-      y: parseInt(screenFrame.y + ((screenFrame.height - window.size().height) / 2)),
-    })
-  }
-}
-
-// Move and resize the window to the left half of the screen.
-var half = function () {
-  var window = Window.focused()
-  if (window) {
-    var screenFrame = window.screen().flippedFrame()
-    window.setFrame({
-      x: screenFrame.x,
-      y: screenFrame.y,
-      width: parseInt(screenFrame.width / 2),
-      height: screenFrame.height,
+      x: parseInt(screenFrame.x + ((screenFrame.width - window.size().width) / 2), 10),
+      y: parseInt(screenFrame.y + ((screenFrame.height - window.size().height) / 2), 10),
     })
   }
 }
 
 addSubShortcutToMenus('m', maximise)
 addSubShortcutToMenus('=', center)
-addSubShortcutToMenus('h', half)
 
 // ------------------------------------------------------------------------------
 // Load any presets define in presets.js
