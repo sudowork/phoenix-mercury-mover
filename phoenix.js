@@ -327,6 +327,10 @@ addSubShortcutToMenus('=', center)
 // Load any presets define in presets.js
 // Must be stored in a variable called PRESETS
 
+function configurePresets() {
+  loadPresets().forEach(addPreset)
+}
+
 function loadPresets() {
   try {
     require('./presets.js')
@@ -356,6 +360,5 @@ function addSubShortcutToMenus(key, shortcut) {
   })
 }
 
-const presets = loadPresets()
-presets.forEach(addPreset)
+configurePresets()
 
