@@ -8,6 +8,31 @@ I upgraded to macOS Sierra and [MercuryMover](http://www.heliumfoot.com/mercurym
 
 Move and resize windows on your Mac from the keyboard, positioning them precisely where you want.
 
+## Installation
+
+Clone this git repository, then symlink `phoenix.js` to `~/.phoenix.js`:
+
+```shell
+# Backup old config
+[ -e ~/.phoenix.js ] && mv ~/.phoenix.js ~/".phoenix.js-$(date +%s)"
+# Symlink new config
+ln -s /path/to/repo/phoenix.js ~/.phoenix.js
+```
+
+### Configuring Presets
+
+Configure custom presets by creating a `presets.js` file in this repository's directory. The file should define a variable `PRESETS`, where each preset is an object with a `key`, `width`, `height`, `x`, and `y` property. Here's an example:
+
+```javascript
+// presets.js
+
+const PRESETS = [
+  {key: 'f', width: 2560, height: 1573, x: 0, y: 23},
+]
+```
+
+See `presets.example.js` for my personal setup.
+
 ## Usage
 
 Hit one of the main shortcut keys to activate the **move** or **resize** mode:

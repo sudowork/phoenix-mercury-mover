@@ -334,46 +334,43 @@ var half = function () {
   }
 }
 
-resizeMode.addSubShortcut('m', [], maximise)
-resizeMode.addSubShortcut('=', [], center)
-resizeMode.addSubShortcut('h', [], half)
-
-moveMode.addSubShortcut('m', [], maximise)
-moveMode.addSubShortcut('=', [], center)
-moveMode.addSubShortcut('h', [], half)
+addSubShortcutToMenus('m', maximise)
+addSubShortcutToMenus('=', center)
+addSubShortcutToMenus('h', half)
 
 // ------------------------------------------------------------------------------
-// The following are personal custom shortcuts which are heavily dependent
-// on my current screen resolutions and sizes.
+// Load any presets define in presets.js
+// Must be stored in a variable called PRESETS
 
-// Safari size/position.
-var customShortcut1 = function () {
-  var window = Window.focused()
-  if (window) {
-    window.setFrame({ x: 5, y: 5 + MENU_BAR_HEIGHT, width: 1204, height: 756 })
+function loadPresets() {
+  try {
+    require('./presets.js')
+    const presets = PRESETS || []
+    Phoenix.log(`Loaded ${presets.length} presets`)
+    return presets
+  } catch (e) {
+    Phoenix.log('No presets found.')
+    Phoenix.log(e)
+    return []
   }
 }
 
-// Safari (external monitor) size/position.
-var customShortcut2 = function () {
-  var window = Window.focused()
-  if (window) {
-    window.setFrame({ x: 5, y: 5 + MENU_BAR_HEIGHT, width: 1615, height: 1069 })
+function addPreset({key, width, height, x, y}) {
+  const shortcut = () => {
+    const window = Window.focused()
+    if (window) {
+      window.setFrame({width, height, x, y})
+    }
   }
+  addSubShortcutToMenus(key, shortcut)
 }
 
-// Terminal position.
-var customShortcut3 = function () {
-  var window = Window.focused()
-  if (window) {
-    window.setTopLeft({ x: 5, y: 5 + MENU_BAR_HEIGHT })
-  }
+function addSubShortcutToMenus(key, shortcut) {
+  mainShortcuts.forEach(mode => {
+    mode.addSubShortcut(key, [], shortcut)
+  })
 }
 
-resizeMode.addSubShortcut('s', [], customShortcut1)
-resizeMode.addSubShortcut('f', [], customShortcut2)
-resizeMode.addSubShortcut('t', [], customShortcut3)
+const presets = loadPresets()
+presets.forEach(addPreset)
 
-moveMode.addSubShortcut('s', [], customShortcut1)
-moveMode.addSubShortcut('f', [], customShortcut2)
-moveMode.addSubShortcut('t', [], customShortcut3)
