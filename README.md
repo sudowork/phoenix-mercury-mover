@@ -30,11 +30,14 @@ Here's an example below:
 ```javascript
 // config.js
 
-const PRESETS = [
-  {key: 'f', width: 2560, height: 1573, x: 0, y: 23},
-  // Using a custom shortcut
-  {key: 'x', shortcut: () => Window.focused().setTopLeft({x: 0, y: 0})},
-]
+const CONFIG = {
+  MAIN_MODIFIERS: ['cmd', 'ctrl'],
+  PRESETS: [
+    {key: 'f', width: 2560, height: 1573, x: 0, y: 23},
+    // Using a custom shortcut
+    {key: 'x', shortcut: () => Window.focused().setTopLeft({x: 0, y: 0})},
+  ],
+}
 ```
 
 See `config.example.js` for my personal setup.
