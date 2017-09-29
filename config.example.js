@@ -18,14 +18,14 @@ const CONFIG = {
     {key: 'n', width: 1200, height: 800,  x: 2560,  y: 800},
 
 
-    // Work: Colemak [1080x1920, 960x1080 (main), 1440x990]
-    // Left Screen
-    {key: 'a', width: 1080, height: 1920, x: -1080, y: 0},
+    // Work: Colemak [1440x990, 960x1080 (main), 1080x1920]
+    // Left Screen (Macbook)
+    {key: 'a', width: 1440, height: 900,  x: -1440, y: 0},
     // Main Screen (Full, Vertical Halves)
     {key: 't', width: 1920, height: 1058, x: 0,     y: 22},
     {key: 'c', width: 960,  height: 1058, x: 0,     y: 22},
     {key: 'v', width: 960,  height: 1058, x: 960,   y: 22},
-    // Right Screen
-    {key: 'o', width: 1440, height: 990,  x: 1920,  y: 0},
+    // Right Screen (Vertical)
+    {key: 'o', width: 1080, height: 1920, x: 1920,  y: 0},
   ],
 }
